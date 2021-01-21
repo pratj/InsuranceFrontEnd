@@ -102,7 +102,7 @@ function RenderCard() {
                         {/* <CardMedia component="img" image={card.image} height="140" title={card.category}/> */}
                         <CardContent className="content">
                             <Typography gutterBottom variant="h5" component="h2">
-                                {card.category}
+                                <b style={{color:"black"}}>{card.category}</b>
                             </Typography>
                             <Typography gutterBottom variant="h6" component="h4">
                                 {card.product}

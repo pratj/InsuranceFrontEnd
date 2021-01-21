@@ -19,6 +19,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import SuccessfulPayment from './Suggestion'
+
 import axios from 'axios'
 import './RenderQuote.css'
 
@@ -180,6 +181,12 @@ function RenderQuote({locationData}) {
       >
         <DialogTitle id="alert-dialog-slide-title">{"Your Payment of was successful"}</DialogTitle>
         <DialogContent>
+        <CardMedia
+          className={classes.media}
+          image="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif"
+          title="Contemplative Reptile"
+        />
+        <img style={{marginLeft:"12%"}}src="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif"/>
           <DialogContentText id="alert-dialog-slide-description">
             Receipt has been sent to your email address. Thank you for choosing us!
             
