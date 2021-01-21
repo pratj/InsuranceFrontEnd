@@ -26,11 +26,17 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
  import "./MiniDrawer.css"
 import { Button } from '@material-ui/core';
 
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+  },
+  footer: {
+    width: 800,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -141,6 +147,12 @@ export default function MiniDrawer({RenderComponent, location}) {
 
   const locationData = location
 
+  // const useStyles = makeStyles({
+  //   ,
+  // });
+  const classesFooter = useStyles();
+  const [value, setValue] = React.useState(0);
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -209,7 +221,11 @@ export default function MiniDrawer({RenderComponent, location}) {
             geoLocation.loaded ? JSON.stringify(geoLocation): "Location data not available yet."
           }
         </div> */}
+        
+        
+        
       </main>
+      
     </div>
   );
 }

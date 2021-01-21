@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import '../RenderCard.css'
 import Form from './Form';
 import loader from '../video/video.mp4'
+import { useHistory } from "react-router";
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     }
 }))
+
 
 function RenderCard() {
 
@@ -53,7 +55,10 @@ function RenderCard() {
     }, [])
 
     const classes = useStyles()
-
+    const history = useHistory();
+    function handleSuggestions(){
+        history.push("/suggestions")
+      }
     const renderCard = (card, index) => {
         return (
             
@@ -76,6 +81,8 @@ function RenderCard() {
             </Grid>
         )
     }
+    
+      
 
     return (
         <div className={`cardRender ${classes.root1}`}>
@@ -101,6 +108,7 @@ function RenderCard() {
                     </DialogContent>
                 </Dialog>
             }
+            <footer style={{marginTop:"90px", marginLeft:"40%"}}><Button onClick={handleSuggestions} style={{borderRadius:"90px", backgroundColor:"", color:"rgba(255, 215, 0,1)"}}><b><h3>Don't know what to choose?</h3></b></Button></footer>
         </div>
     )
 }

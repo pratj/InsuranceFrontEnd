@@ -12,7 +12,7 @@ function Suggestion() {
 <source src={loader} type="video/ogg" />
 Your browser does not support the video tag. 
 
- </video><h1 style={{color:"rgba(255,255,255,0.7)", display:"flex", justifyContent:"center", textAlign:"center"}}>Your Suggestions</h1> </>
+ </video><h1 style={{color:"rgba(0,0,0,0.7)", display:"flex", justifyContent:"center", textAlign:"center"}}></h1> </>
         
         
         <div className="bigcard" 
@@ -26,7 +26,7 @@ Your browser does not support the video tag.
       borderLeft:'3px solid rgba(255,255,255,0.1)',
       backdropFilter:'blur(5px)'
     }} 
-  overlayStyle={{backgroundColor: 'transparent'}}><h1 style={{color:"white"}}>Hello.</h1>{RenderCard()}</div>
+  overlayStyle={{backgroundColor: 'transparent'}}><h1 style={{color:"white"}}> <span style={{color:"rgba(255,255,255,0.7)"}}>Hello, checkout some of our most popular Insurances</span></h1>{RenderCard()}</div>
         
         
         
@@ -71,15 +71,27 @@ function RenderCard() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:9090/api/categories").then((response) => {
-            console.log(response.data)
-            setCardConfig(response.data)
+        axios.get("http://localhost:9090/api/category/request/count").then((response) => {
+            
+            response.data.sort(GetSortOrder("count"));
+            const temp=response.data.slice(0,3)
+              console.log(temp)
+            setCardConfig(temp)
         })
         
     }, [])
 
     const classes = useStyles()
-
+    function GetSortOrder(prop) {    
+        return function(a, b) {    
+            if (a[prop] > b[prop]) {    
+                return -1;    
+            } else if (a[prop] < b[prop]) {    
+                return 1;    
+            }    
+            return 0;    
+        }    
+    } 
     const renderCard = (card, index) => {
         return (
             <Grid item xs={12} sm={4}>
