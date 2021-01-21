@@ -108,7 +108,7 @@ function RenderQuote({locationData}) {
         return <StripeCheckout
             stripeKey={process.env.REACT_APP_STRIPE_KEY}
             currency="INR"
-            image="favicon.ico"
+            //image="logo.png"
             description={`${quoteResponse.product} By ${partner}`}
             token={handleToken}
             amount={premium*100}            
@@ -179,13 +179,9 @@ function RenderQuote({locationData}) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Your Payment of was successful"}</DialogTitle>
+        <DialogTitle style={{textAlign:"center"}}id="alert-dialog-slide-title">{"Your Payment of was successful"}</DialogTitle>
         <DialogContent>
-        <CardMedia
-          className={classes.media}
-          image="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif"
-          title="Contemplative Reptile"
-        />
+        
         <img style={{marginLeft:"12%"}}src="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif"/>
           <DialogContentText id="alert-dialog-slide-description">
             Receipt has been sent to your email address. Thank you for choosing us!
