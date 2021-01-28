@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Container, TextField, Typography } from "@material-ui/core";
@@ -12,13 +12,18 @@ import {
   Switch,
 } from "@material-ui/core";
 import "date-fns";
-
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import Controls from "../components/formControls/Controls/Controls";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
-    color:"#b58500"
+    color: "#b58500",
   },
   form: {
     width: "100%",
@@ -26,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor:"gold"
+    backgroundColor: "gold",
   },
 }));
 
@@ -34,7 +39,8 @@ function RenderForm({ formFields, onSubmit }) {
   var validations;
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
-
+  const [selectedStartDate, handleStartDateChange] = useState(new Date());
+  const [selectedEndDate, handleEndDateChange] = useState(new Date());
   const handlePattern = (validation) => {
     let tempValidation = validation;
     tempValidation["pattern"]["value"] = new RegExp(validation.pattern.value);
@@ -78,22 +84,53 @@ function RenderForm({ formFields, onSubmit }) {
             </div>
           );
 
-        case "date":
+        case "startdate":
           return (
             <div key={name}>
-              <TextField
-                className="date"
-                id={name}
-                name={name}
-                type={type}
-                label={label}
-                placeholder={placeholder}
-                inputRef={register(validations)}
-                variant="outlined"
-                margin="normal"
-                InputLabelProps={{ shrink: true }}
-                fullWidth
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  id={name}
+                  name={name}
+                  label={label}
+                  value={selectedStartDate}
+                  placeholder={placeholder}
+                  variant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  onChange={(date) => handleStartDateChange(date)}
+                  minDate={new Date()}
+                  InputLabelProps={{ shrink: true }}
+                  inputRef={register(validations)}
+                  fullWidth
+                />
+              </MuiPickersUtilsProvider>
+              {errors[name] && (
+                <span style={{ color: "red" }}>* {errors[name].message}</span>
+              )}
+            </div>
+          );
+
+        case "enddate":
+          return (
+            <div key={name}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  id={name}
+                  name={name}
+                  label={label}
+                  value={selectedEndDate}
+                  placeholder={placeholder}
+                  variant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  minDate={selectedStartDate}
+                  onChange={(date) => handleEndDateChange(date)}
+                  InputLabelProps={{ shrink: true }}
+                  inputRef={register(validations)}
+                  fullWidth
+                />
+              </MuiPickersUtilsProvider>
+
               {errors[name] && (
                 <span style={{ color: "red" }}>* {errors[name].message}</span>
               )}
@@ -110,7 +147,7 @@ function RenderForm({ formFields, onSubmit }) {
                 <option value="Australia">Australia</option>
                 <option value="USA">USA</option>
               </select>
-              {errors[name] && (
+              {errors[name]  && (
                 <span style={{ color: "red" }}>* {errors[name].message}</span>
               )}
               {/* <Controls.CountrySelect /> */}
@@ -169,7 +206,7 @@ function RenderForm({ formFields, onSubmit }) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            style={{ borderRadius: "15px" }} 
+            style={{ borderRadius: "15px" }}
           >
             Submit
           </Button>
