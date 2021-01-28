@@ -34,8 +34,20 @@ const useStyles = makeStyles((theme) => ({
 
 function RenderForm({formFields, onSubmit}) {
 
+    var validations
     const classes = useStyles();
     const { register, handleSubmit, errors } = useForm()
+
+    const handlePattern = (validation) => {
+        let tempValidation = validation
+        tempValidation["pattern"]["value"] = new RegExp(validation.pattern.value)
+        validations = tempValidation
+    }
+
+    const handleValidations = (validation) => {
+        validations = validation
+    }
+    
     const [loading, setLoading] = useState(false);
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -45,7 +57,8 @@ function RenderForm({formFields, onSubmit}) {
     const renderFields = (fields) => {
 
         return fields.map(field => {
-            const { name, type, label, placeholder } = field
+            const { name, type, label, placeholder, validation } = field
+            {validation.hasOwnProperty("pattern") ? handlePattern(validation) : handleValidations(validation)}
 
             switch(type){
 
@@ -53,11 +66,12 @@ function RenderForm({formFields, onSubmit}) {
                 case 'email':
                 case 'tel':
                 case 'number':
-                //case 'date':
+                
                     return (
                         <div key={name}>
-                            <TextField id={name} name={name} type={type} label={label} placeholder={placeholder} inputRef={register}
+                            <TextField id={name} name={name} type={type} label={label} placeholder={placeholder} inputRef={register(validations)}
                                 variant="outlined" margin="normal" required fullWidth/>
+                                {errors[name] && <small style={{color: "red"}}>* {errors[name].message}</small>}
                                 {/* <Controls.Input id={name} name={name} type={type} label={label} placeholder={placeholder}    inputRef={register}/> */}
                         </div>
                     )
@@ -67,7 +81,7 @@ function RenderForm({formFields, onSubmit}) {
                             {/* <Controls.Input id={name} name={name} type={type} label={label} placeholder={placeholder}    inputRef={register}/> */}
                             {/* <Controls.DatePicker id={name} name={name} type={type} label={label} inputRef={register} /> */}
 
-                            <TextField className="date" id={name} name={name} type={type} label={label} placeholder={placeholder} inputRef={register}
+                            <TextField className="date" id={name} name={name} type={type} label={label} placeholder={placeholder} inputRef={register(validations)}
                                 variant="outlined" margin="normal"  InputLabelProps={{ shrink: true }} required fullWidth/>
                                 
                         </div>

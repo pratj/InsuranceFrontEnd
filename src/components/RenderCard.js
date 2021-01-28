@@ -108,7 +108,7 @@ function RenderCard() {
                     </DialogContent>
                 </Dialog>
             }
-            <footer style={{marginTop:"90px", marginLeft:"40%"}}><Button onClick={handleSuggestions} style={{borderRadius:"90px", backgroundColor:"", color:"rgba(161, 134, 0,1)"}}><b><h3>Don't know what to choose?</h3></b></Button></footer>
+            <footer style={{marginTop:"90px", marginLeft:"40%"}}><Button variant="outlined"  color="primary" onClick={handleSuggestions} style={{borderRadius:"90px", backgroundColor:"", }}><b><h3>Don't know what to choose?</h3></b></Button></footer>
         </div>
     )
 }
