@@ -16,18 +16,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import AssessmentIcon from '@material-ui/icons/Assessment';
 import BusinessIcon from '@material-ui/icons/Business';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import InfoIcon from '@material-ui/icons/Info';
 import { useHistory } from "react-router";
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
- import useGeoLocation from '../geolocation/useGeoLocation'
- import "./MiniDrawer.css"
+import "./MiniDrawer.css"
 import { Button } from '@material-ui/core';
-
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 const drawerWidth = 240;
 
@@ -42,8 +37,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-      alignItems: 'center',
+      duration: theme.transitions.duration.leavingScreen
     }),
   },
   appBarShift: {
@@ -85,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
@@ -102,7 +95,6 @@ export default function MiniDrawer({RenderComponent, location}) {
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
-   const geoLocation= useGeoLocation();
 
   const [open, setOpen] = React.useState(false);
 
@@ -123,12 +115,6 @@ export default function MiniDrawer({RenderComponent, location}) {
     {
       text: "Services",
       icon: <BusinessIcon/>,
-      subMenu: [{
-        text: "",
-      icon: <BusinessIcon/>,
-      text: "Services",
-      icon: <BusinessIcon/>,
-      }]
     },
     {
       text: "Partners",
@@ -141,17 +127,10 @@ export default function MiniDrawer({RenderComponent, location}) {
     },
     {
       text: "About Us",
-      icon: <InfoIcon/>
+      icon: <InfoIcon/>,
+      onClick: () => history.push("/aboutus")
     }
   ]
-
-  const locationData = location
-
-  // const useStyles = makeStyles({
-  //   ,
-  // });
-  const classesFooter = useStyles();
-  const [value, setValue] = React.useState(0);
   
   return (
     <div className={classes.root}>
@@ -175,9 +154,8 @@ export default function MiniDrawer({RenderComponent, location}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h4" noWrap style={{cursor: 'pointer', fontFamily: 'Righteous, cursive',color: 'white', alignItems: 'center'}} onClick={() => history.push("/")} >
-            {/* <img style={{width: "35px", height:"35px" }} src="https://www.freeiconspng.com/uploads/insurance-icon-10.png"/> */}
-            <Button style={{borderRadius:"99999999px", backgroundColor:"#d1a515"}}><img src="favicon.ico" style={{width: "35px", height:"35px" }} /></Button>
+          <Typography variant="h4" noWrap style={{cursor: 'pointer', fontFamily: 'Righteous, cursive',color: 'white'}} onClick={() => history.push("/")}>
+            <Button style={{borderRadius:"99999999px", backgroundColor:"#d1a515"}}><img src="favicon.ico" style={{width: "35px", height:"35px" }} alt="not available"/></Button>
             &nbsp;&nbsp;Insurance Bazaar
           </Typography>
         </Toolbar>
@@ -216,16 +194,7 @@ export default function MiniDrawer({RenderComponent, location}) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {typeof location.location.state === 'undefined' ? <RenderComponent/> : <RenderComponent locationData={location}/>}
-        {/* <div>
-          {
-            geoLocation.loaded ? JSON.stringify(geoLocation): "Location data not available yet."
-          }
-        </div> */}
-        
-        
-        
-      </main>
-      
+      </main> 
     </div>
   );
 }
