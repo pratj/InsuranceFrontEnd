@@ -118,7 +118,8 @@ export default function MiniDrawer({RenderComponent, location}) {
     },
     {
       text: "Partners",
-      icon: <LoyaltyIcon/>
+      icon: <LoyaltyIcon/>,
+      onClick: () => history.push("/partners")
     },
     {
       text: "Products",
