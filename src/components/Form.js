@@ -15,7 +15,7 @@ function Form({cardInfo, setOpenPopup}) {
       const userLocation= geoLocation.loaded ? (geoLocation): "Location data not available yet."
       const finalData = {category: cardInfo.category, product: cardInfo.product, formData: data, userLocation:userLocation}
       console.log(finalData)
-      axios.post("http://localhost:9090/api/response", finalData).then((response) => {
+      axios.post(`${process.env.REACT_APP_BASE_URL}/api/response`, finalData).then((response) => {
         const quoteData={category: cardInfo.category,product: cardInfo.product, quoteData: response.data, userLocation:userLocation} 
         redirectToPath(quoteData)
       })
@@ -27,7 +27,7 @@ function Form({cardInfo, setOpenPopup}) {
     }
   
     useEffect(() => {
-        axios.get(`http://localhost:9090/api/config/category/${cardInfo.category}/product/${cardInfo.product}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/config/category/${cardInfo.category}/product/${cardInfo.product}`).then((response) => {
             setFormFields(response.data[0].fields)
         })    
     }, [cardInfo.category, cardInfo.product])

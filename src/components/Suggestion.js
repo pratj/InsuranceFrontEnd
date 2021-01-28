@@ -71,7 +71,7 @@ function RenderCard() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:9090/api/category/request/count").then((response) => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/request/count`).then((response) => {
             
             response.data.sort(GetSortOrder("count"));
             const temp=response.data.slice(0,3)

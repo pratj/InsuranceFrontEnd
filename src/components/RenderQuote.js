@@ -74,7 +74,8 @@ function RenderQuote({ locationData }) {
       amount: amountPayed,
       userLocation: quoteResponse.userLocation,
     };
-    const response = await axios.post("http://localhost:9090/api/charge", {
+    console.log(`${process.env.REACT_APP_STRIPE_KEY}/api/payment`)
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/charge`, {
       data,
     });
     const { status } = response.data;

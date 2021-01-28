@@ -52,7 +52,8 @@ function RenderCard() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:9090/api/categories").then((response) => {
+    console.log(`${process.env.REACT_APP_BASE_URL}/api/categories`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/categories`).then((response) => {
       console.log(response.data);
       setCardConfig(response.data);
     });
