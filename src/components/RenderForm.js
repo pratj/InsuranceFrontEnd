@@ -188,7 +188,7 @@ function RenderForm({ formFields, onSubmit }) {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className="renderForm">
+    <Container component="main" maxWidth="xs" className="renderForm" data-test="renderForm">
       <div className={classes.paper}>
         <Typography variant="subtitle1">
           Provide the following details

@@ -134,7 +134,7 @@ export default function MiniDrawer({RenderComponent, location}) {
   ]
   
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-test="miniDrawer">
       <CssBaseline />
       <AppBar
         position="fixed"

@@ -98,7 +98,7 @@ function RenderCard() {
   };
 
   return (
-    <div className={`cardRender ${classes.root1}`}>
+    <div className={`cardRender ${classes.root1}`} data-test="renderCard">
       <Grid container spacing={3}>
         {typeof cardConfig !== "undefined" && cardConfig.map(renderCard)}
       </Grid>

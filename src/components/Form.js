@@ -35,7 +35,7 @@ function Form({cardInfo, setOpenPopup}) {
 
     return (
 
-      <div>
+      <div className="form" data-test="form">
         {typeof formFields !== 'undefined' && 
           <RenderForm formFields={formFields} onSubmit={onSubmit}/>
         }    

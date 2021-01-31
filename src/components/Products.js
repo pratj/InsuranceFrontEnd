@@ -15,7 +15,7 @@ function Products() {
     }, [])
 
     return (
-        <Grid container>
+        <Grid container className="products" data-test="products">
             <Grid item xs={false} sm={2}></Grid>
             <Grid item xs={12} sm={8}>
                 <Typography variant="h3" style={{ textAlign: 'center', color:"#b58500"}}><b>Our products</b></Typography>

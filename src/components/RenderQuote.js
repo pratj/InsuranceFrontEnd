@@ -174,7 +174,7 @@ function RenderQuote({ locationData }) {
   };
 
   return (
-    <div>
+    <div data-test="renderQuote">
       <Grid container>{quoteData.map(renderPartner)}</Grid>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
