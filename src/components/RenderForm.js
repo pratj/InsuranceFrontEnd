@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Container, TextField, Typography } from "@material-ui/core";
-import "../RenderForm.css";
+import "./RenderForm.css";
 import {
   FormControl,
   FormLabel,

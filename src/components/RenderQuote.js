@@ -1,5 +1,5 @@
 import { Button, Grid } from "@material-ui/core";
-import React from "react";
+import React, {useState} from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -39,6 +39,7 @@ function Alert(props) {
 function RenderQuote({ locationData }) {
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [paymentStatus, setPaymentStatus] = useState();
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -81,8 +82,12 @@ function RenderQuote({ locationData }) {
     const { status } = response.data;
 
     if (status === "succeeded") {
+      setPaymentStatus(status);
       setOpen(true);
       setOpenDialog(true);
+    }
+    else{
+      setPaymentStatus("error");
     }
   }
 
@@ -177,9 +182,12 @@ function RenderQuote({ locationData }) {
     <div data-test="renderQuote">
       <Grid container>{quoteData.map(renderPartner)}</Grid>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
+      {paymentStatus === "succeeded" ?<Alert onClose={handleClose} severity="success">
           Success! Check email for details
-        </Alert>
+        </Alert>:
+        <Alert onClose={handleClose} severity="error">
+        Sorry! Payment has failed
+      </Alert>}
       </Snackbar>
       <div>
         <Dialog
@@ -194,18 +202,18 @@ function RenderQuote({ locationData }) {
             style={{ textAlign: "center" }}
             id="alert-dialog-slide-title"
           >
-            {"Your Payment of was successful"}
+            {paymentStatus === "succeeded" ?"Your Payment of was successful":"Your payment was Unsuccessful"}
           </DialogTitle>
 
           <DialogContent>
-            <img
+          {paymentStatus === "succeeded" ?<img
               style={{ marginLeft: "12%" }}
               src="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif"
               alt="not available"
-            />
+            />:<p>Error!</p>}
             <DialogContentText id="alert-dialog-slide-description">
-              Receipt has been sent to your email address. Thank you for
-              choosing us!
+              {paymentStatus === "succeeded" ? <p>Receipt has been sent to your email address. Thank you for
+              choosing us!</p>: <p>Some error has occured</p>}
             </DialogContentText>
           </DialogContent>
 

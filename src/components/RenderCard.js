@@ -14,7 +14,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import axios from "axios";
 import CloseIcon from "@material-ui/icons/Close";
-import "../RenderCard.css";
+import "./RenderCard.css";
 import Form from "./Form";
 import { useHistory } from "react-router";
 

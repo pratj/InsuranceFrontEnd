@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useHistory } from "react-router";
 import useGeoLocation from '../geolocation/useGeoLocation'
 
-function Form({cardInfo, setOpenPopup}) {
+const Form = ({cardInfo, setOpenPopup}) => {
         
     const [formFields, setFormFields] = useState()
     const history = useHistory();
