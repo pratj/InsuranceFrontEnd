@@ -37,12 +37,12 @@ jobs:
 #         with:
 #           java-version: 11.0.4
       - name: docker login
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USERNAME}} 
-          DOCKER_PASSWORD:  ${{secrets.DOCKER_PASSWORD}}
-          REPO: ${{secrets.REPO}} 
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
+#         env:
+#           DOCKER_USER: ${{secrets.DOCKER_USERNAME}} 
+#           DOCKER_PASSWORD:  ${{secrets.DOCKER_PASSWORD}}
+#           REPO: ${{secrets.REPO}} 
+#         run: |
+#           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
       - name: build docker 
         run: |
           docker build "$GITHUB_WORKSPACE/Frontend/InsuranceApplication" -f  "Dockerfile" 
