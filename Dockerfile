@@ -1,3 +1,14 @@
+FROM node:13.1-alpine as build
+
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN yarn cache clean && yarn --update-checksums
+COPY . ./
+RUN yarn && yarn build
+
+
+
+
 FROM nginx:1.15.2-alpine
 COPY ./build /var/www
 COPY nginx.conf /etc/nginx/nginx.conf
