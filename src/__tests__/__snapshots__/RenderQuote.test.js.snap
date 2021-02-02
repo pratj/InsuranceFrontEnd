@@ -97,9 +97,9 @@ exports[`RenderQuote snapshot 1`] = `
   >
     <Alert
       onClose={[Function]}
-      severity="success"
+      severity="error"
     >
-      Success! Check email for details
+      Sorry! Payment has failed
     </Alert>
   </WithStyles(ForwardRef(Snackbar))>
   <div>
@@ -124,22 +124,18 @@ exports[`RenderQuote snapshot 1`] = `
           }
         }
       >
-        Your Payment of was successful
+        Your payment was Unsuccessful
       </WithStyles(ForwardRef(DialogTitle))>
       <WithStyles(ForwardRef(DialogContent))>
-        <img
-          alt="not available"
-          src="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif"
-          style={
-            Object {
-              "marginLeft": "12%",
-            }
-          }
-        />
+        <p>
+          Error!
+        </p>
         <WithStyles(ForwardRef(DialogContentText))
           id="alert-dialog-slide-description"
         >
-          Receipt has been sent to your email address. Thank you for choosing us!
+          <p>
+            Some error has occured
+          </p>
         </WithStyles(ForwardRef(DialogContentText))>
       </WithStyles(ForwardRef(DialogContent))>
       <WithStyles(ForwardRef(DialogActions))>
