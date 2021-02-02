@@ -9,9 +9,8 @@ RUN npm run build
 
 
 
-FROM nginx:1.15.2-alpine
-COPY ./build /var/www
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM nginx:1.17.1-alpine
+COPY --from=build-step /app/build /usr/share/nginx/html
 # ARG REACT_APP_STRIPE_KEY_ARG
 # ENV REACT_APP_STRIPE_KEY=$REACT_APP_STRIPE_KEY_ARG
 # ARG REACT_APP_BASE_URL_ARG
